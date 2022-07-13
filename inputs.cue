@@ -13,6 +13,7 @@ config: {
 	enable_historical_metrics: bool | *true  @tag(enable_historical_metrics,type=bool)
 	debug:                     bool | *false @tag(debug,type=bool) // currently just controls k8s/outputs/operator.cue for debugging
 	test:                      bool | *false @tag(test,type=bool)  // currently just turns off GitOps so CI integration tests can manipulate directly
+	enable_multimesh_bridge:   bool | *true  @tab(enable_multimesh_bridge, type=bool)
 
 	// for a hypothetical future where we want to mount specific certificates for operator webhooks, etc.
 	generate_webhook_certs: bool | *true        @tag(generate_webhook_certs,type=bool)
@@ -61,7 +62,7 @@ defaults: {
 		operator: string | *"quay.io/greymatterio/operator:0.9.1" @tag(operator_image)
 	}
 
-	bridge: {
+	multimesh_bridge: {
 		_enable_rbac: true
 		enable_tls: true
 		tls_secret_name: string | *"gm-edge-ingress-certs"

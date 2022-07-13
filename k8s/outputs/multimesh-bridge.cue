@@ -5,8 +5,8 @@ import (
 	corev1 "k8s.io/api/core/v1"
 )
 
-let Name = "control-edge"
-control_edge: [
+let Name = "multimesh-bridge"
+multimesh_bridge: [
 	appsv1.#Deployment & {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
@@ -27,7 +27,7 @@ control_edge: [
 						#sidecar_container_block & {
 							_Name: Name
 							_volume_mounts: [
-								if defaults.bridge.enable_tls == true {
+								if defaults.multimesh_bridge.enable_tls == true {
 									{
 										name:      "tls-certs"
 										mountPath: "/etc/proxy/tls/sidecar"
@@ -47,10 +47,10 @@ control_edge: [
 						},
 					]
 					volumes: #sidecar_volumes + [
-							if defaults.bridge.enable_tls == true {
+							if defaults.multimesh_bridge.enable_tls == true {
 							{
 								name: "tls-certs"
-								secret: {defaultMode: 420, secretName: defaults.bridge.tls_secret_name}
+								secret: {defaultMode: 420, secretName: defaults.multimesh_bridge.tls_secret_name}
 							}
 						},
 					]
