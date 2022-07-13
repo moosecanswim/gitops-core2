@@ -54,10 +54,17 @@ defaults: {
 		edge_ingress:    defaults.ports.default_ingress
 		redis_ingress:   10910
 		metrics:         8081
+		control_ingress: 50000
 	}
 
 	images: {
 		operator: string | *"quay.io/greymatterio/operator:0.9.1" @tag(operator_image)
+	}
+
+	bridge: {
+		_enable_rbac: true
+		enable_tls: true
+		tls_secret_name: string | *"gm-edge-ingress-certs"
 	}
 
 	edge: {

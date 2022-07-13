@@ -27,7 +27,7 @@ control_edge: [
 						#sidecar_container_block & {
 							_Name: Name
 							_volume_mounts: [
-								if defaults.edge.enable_tls == true {
+								if defaults.bridge.enable_tls == true {
 									{
 										name:      "tls-certs"
 										mountPath: "/etc/proxy/tls/sidecar"
@@ -47,10 +47,10 @@ control_edge: [
 						},
 					]
 					volumes: #sidecar_volumes + [
-							if defaults.edge.enable_tls == true {
+							if defaults.bridge.enable_tls == true {
 							{
 								name: "tls-certs"
-								secret: {defaultMode: 420, secretName: "gm-edge-ingress-certs"}
+								secret: {defaultMode: 420, secretName: defaults.bridge.tls_secret_name}
 							}
 						},
 					]
