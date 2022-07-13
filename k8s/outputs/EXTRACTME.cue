@@ -32,7 +32,7 @@ k8s_manifests: controlensemble +
 	[ for x in openshift_spire if config.openshift && config.spire {x}]
 
 prometheus_manifests: [ for x in prometheus if config.enable_historical_metrics {x}]
-multimesh_bridge_yaml: multimesh_bridge
+multimesh_bridge_yaml: [ for x in multimesh_bridge if config.enable_multimesh_bridge {x} ]
 
 // for CLI convenience,
 // e.g. `cue eval -c ./k8s/outputs --out text -e k8s_manifests_yaml`

@@ -75,4 +75,15 @@ catalog_entries: [
 			api_endpoint:    "/services/prometheus/api/v1/"
 		}
 	},
+	if config.enable_multimesh_bridge {
+		#CatalogService & {
+			name:            "Multimesh Bridge"
+			mesh_id: mesh.metadata.name
+			service_id: "multimesh-bridge"
+			version:         strings.Split(mesh.spec.images.proxy, ":")[1]
+			description:     "Grey Matter Access point for multimesh connections."
+			api_endpoint: "/services/multimesh-bridge"
+			business_impact: "critical"
+		},
+	}
 ]
