@@ -27,20 +27,20 @@ k8s_manifests: controlensemble +
 	redis +
 	edge +
 	dashboard +
-	[ for x in multimesh_bridge if config.enable_multimesh_bridge {x} ]+
-    [ for x in prometheus if config.enable_historical_metrics {x}] +
+	[ for x in multimesh_bridge if config.enable_multimesh_bridge {x}] +
+	[ for x in prometheus if config.enable_historical_metrics {x}] +
 	[ for x in openshift_spire if config.openshift && config.spire {x}]
 
 prometheus_manifests: [ for x in prometheus if config.enable_historical_metrics {x}]
-multimesh_bridge_yaml: [ for x in multimesh_bridge if config.enable_multimesh_bridge {x} ]
+multimesh_bridge_yaml: [ for x in multimesh_bridge if config.enable_multimesh_bridge {x}]
 
 // for CLI convenience,
 // e.g. `cue eval -c ./k8s/outputs --out text -e k8s_manifests_yaml`
 operator_manifests_yaml:         yaml.MarshalStream(operator_manifests)
 all_but_operator_manifests_yaml: yaml.MarshalStream(all_but_operator_manifests)
-spire_manifests_yaml: yaml.MarshalStream(spire_manifests)
-k8s_manifests_yaml: yaml.MarshalStream(k8s_manifests)
-prometheus_manifests_yaml: yaml.MarshalStream(prometheus_manifests)
+spire_manifests_yaml:            yaml.MarshalStream(spire_manifests)
+k8s_manifests_yaml:              yaml.MarshalStream(k8s_manifests)
+prometheus_manifests_yaml:       yaml.MarshalStream(prometheus_manifests)
 
 multimesh_bridge_yamlx: yaml.MarshalStream(multimesh_bridge_yaml)
 

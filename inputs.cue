@@ -63,8 +63,8 @@ defaults: {
 	}
 
 	multimesh_bridge: {
-		_enable_rbac: true
-		enable_tls: true
+		_enable_rbac:    true
+		enable_tls:      true
 		tls_secret_name: string | *"gm-edge-ingress-certs"
 	}
 
